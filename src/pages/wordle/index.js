@@ -15,41 +15,39 @@ function Wordle() {
   function Keyboard(setKey, setColor, setValue) {
     (this.key = setKey), (this.color = setColor), (this.value = setValue);
   }
-  const [keyboard, setKeyboard] = useState([]);
-  useEffect(() => {
-    setKeyboard([
-      new Keyboard("A", "#808384", "A"),
-      new Keyboard("B", "#808384", "B"),
-      new Keyboard("C", "#808384", "C"),
-      new Keyboard("Ç", "#808384", "Ç"),
-      new Keyboard("D", "#808384", "D"),
-      new Keyboard("E", "#808384", "E"),
-      new Keyboard("F", "#808384", "F"),
-      new Keyboard("G", "#808384", "G"),
-      new Keyboard("Ğ", "#808384", "Ğ"),
-      new Keyboard("H", "#808384", "H"),
-      new Keyboard("I", "#808384", "I"),
-      new Keyboard("İ", "#808384", "İ"),
-      new Keyboard("J", "#808384", "J"),
-      new Keyboard("K", "#808384", "K"),
-      new Keyboard("L", "#808384", "L"),
-      new Keyboard("M", "#808384", "M"),
-      new Keyboard("N", "#808384", "N"),
-      new Keyboard("O", "#808384", "O"),
-      new Keyboard("Ö", "#808384", "Ö"),
-      new Keyboard("P", "#808384", "P"),
-      new Keyboard("R", "#808384", "R"),
-      new Keyboard("S", "#808384", "S"),
-      new Keyboard("Ş", "#808384", "Ş"),
-      new Keyboard("T", "#808384", "T"),
-      new Keyboard("U", "#808384", "U"),
-      new Keyboard("Ü", "#808384", "Ü"),
-      new Keyboard("V", "#808384", "V"),
-      new Keyboard("Y", "#808384", "Y"),
-      new Keyboard("Z", "#808384", "Z"),
-    ]);
-  }, [setKeyboard]);
-
+  let defaultKeyboard = [
+    new Keyboard("A", "#808384", "A"),
+    new Keyboard("B", "#808384", "B"),
+    new Keyboard("C", "#808384", "C"),
+    new Keyboard("Ç", "#808384", "Ç"),
+    new Keyboard("D", "#808384", "D"),
+    new Keyboard("E", "#808384", "E"),
+    new Keyboard("F", "#808384", "F"),
+    new Keyboard("G", "#808384", "G"),
+    new Keyboard("Ğ", "#808384", "Ğ"),
+    new Keyboard("H", "#808384", "H"),
+    new Keyboard("I", "#808384", "I"),
+    new Keyboard("İ", "#808384", "İ"),
+    new Keyboard("J", "#808384", "J"),
+    new Keyboard("K", "#808384", "K"),
+    new Keyboard("L", "#808384", "L"),
+    new Keyboard("M", "#808384", "M"),
+    new Keyboard("N", "#808384", "N"),
+    new Keyboard("O", "#808384", "O"),
+    new Keyboard("Ö", "#808384", "Ö"),
+    new Keyboard("P", "#808384", "P"),
+    new Keyboard("R", "#808384", "R"),
+    new Keyboard("S", "#808384", "S"),
+    new Keyboard("Ş", "#808384", "Ş"),
+    new Keyboard("T", "#808384", "T"),
+    new Keyboard("U", "#808384", "U"),
+    new Keyboard("Ü", "#808384", "Ü"),
+    new Keyboard("V", "#808384", "V"),
+    new Keyboard("Y", "#808384", "Y"),
+    new Keyboard("Z", "#808384", "Z"),
+  ];
+  const [keyboard, setKeyboard] = useState(defaultKeyboard);
+  
   const [gameRound, setGameRound] = useState(0);
   const DICTIONARY = [
     "RADYO",
@@ -78,9 +76,12 @@ function Wordle() {
     "CEVİZ",
   ];
   const [SELECTEDWORD, SETSELECTEDEDWORD] = useState("");
-  useEffect(() => {
+  function wordSelect() {
     SETSELECTEDEDWORD(WORDS[Math.floor(Math.random() * WORDS.length)]);
-  }, [SETSELECTEDEDWORD, WORDS[Math.floor(Math.random() * WORDS.length)], WORDS]);
+  }
+  useEffect(() => {
+    wordSelect();
+  }, []);
   const SELECTEDWORDCHARS = SELECTEDWORD.split("");
   let foundGreens = [];
   let foundGreys = [];
@@ -125,18 +126,26 @@ function Wordle() {
           .map((key) => {
             key.color = "green";
           });
+
       }
       newArr[gameRound].color[index] = "green";
     } else if (SELECTEDWORDCHARS.includes(char)) {
       foundOranges.push(char);
       newArr[gameRound].color[index] = "orange";
+
+      newKeyboard. filter((key) => key.value === char && key.color != "green").map((key) => {
+        key.color = "orange";
+      });
+      
+
     } else {
       if (!foundGreys.includes(char)) {
+
         foundGreys.push(char);
         newKeyboard
           .filter((key) => key.value === char)
           .map((key) => {
-            key.color = "grey";
+            key.color = "#3A3A3C";
           });
       }
       newArr[gameRound].color[index] = "grey";
