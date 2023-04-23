@@ -75,13 +75,9 @@ function Wordle() {
     "ROMAN",
     "CEVİZ",
   ];
-  const [SELECTEDWORD, SETSELECTEDEDWORD] = useState("");
-  function wordSelect() {
-    SETSELECTEDEDWORD(WORDS[Math.floor(Math.random() * WORDS.length)]);
-  }
-  useEffect(() => {
-    wordSelect();
-  }, []);
+
+  const [SELECTEDWORD, SETSELECTEDWORD] = useState(WORDS[Math.floor(Math.random() * WORDS.length)]);
+  
   const SELECTEDWORDCHARS = SELECTEDWORD.split("");
   let foundGreens = [];
   let foundGreys = [];
@@ -95,7 +91,6 @@ function Wordle() {
       return false;
     }
   }
-
   function checkWord(word) {
     if (word === SELECTEDWORD) {
       setWin(1);
