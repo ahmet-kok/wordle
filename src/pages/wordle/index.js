@@ -80,18 +80,7 @@ function Wordle() {
   const [SELECTEDWORD, SETSELECTEDEDWORD] = useState("");
   useEffect(() => {
     SETSELECTEDEDWORD(WORDS[Math.floor(Math.random() * WORDS.length)]);
-  }, [
-    gameRound,
-    WORDS,
-    WORDS.length,
-    WORDS[Math.floor(Math.random() * WORDS.length)],
-
-    SELECTEDWORD,
-
-    SETSELECTEDEDWORD,
-
-    WORDS[Math.floor(Math.random() * WORDS.length)],
-  ]);
+  }, [SETSELECTEDEDWORD, WORDS[Math.floor(Math.random() * WORDS.length)]]);
   const SELECTEDWORDCHARS = SELECTEDWORD.split("");
   let foundGreens = [];
   let foundGreys = [];
