@@ -1,3 +1,15 @@
+* {
+  background-color: #121214;
+
+}
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  font-size: 50px;
+  text-shadow: 2px 2px 2px #000;
+}
 .input {
     width: max-content;
     margin-left: auto;

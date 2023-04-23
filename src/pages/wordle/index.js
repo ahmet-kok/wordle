@@ -48,7 +48,7 @@ function Wordle() {
       new Keyboard("Y", "#808384", "Y"),
       new Keyboard("Z", "#808384", "Z"),
     ]);
-  }, []);
+  }, [setKeyboard]);
 
   const [gameRound, setGameRound] = useState(0);
   const DICTIONARY = [
@@ -80,7 +80,18 @@ function Wordle() {
   const [SELECTEDWORD, SETSELECTEDEDWORD] = useState("");
   useEffect(() => {
     SETSELECTEDEDWORD(WORDS[Math.floor(Math.random() * WORDS.length)]);
-  }, []);
+  }, [
+    gameRound,
+    WORDS,
+    WORDS.length,
+    WORDS[Math.floor(Math.random() * WORDS.length)],
+
+    SELECTEDWORD,
+
+    SETSELECTEDEDWORD,
+
+    WORDS[Math.floor(Math.random() * WORDS.length)],
+  ]);
   const SELECTEDWORDCHARS = SELECTEDWORD.split("");
   let foundGreens = [];
   let foundGreys = [];
@@ -115,17 +126,16 @@ function Wordle() {
       }
     }
     ); */
-    console.log(foundGreens);
-    console.log(foundOranges);
-    console.log(foundGreys);
   }
   function checkChar(char, index) {
     if (char === SELECTEDWORDCHARS[index]) {
       if (!foundGreens.includes(char)) {
         foundGreens.push(char);
-        newKeyboard.filter((key) => key.value === char).map((key) => {
-          key.color = "green";
-        });
+        newKeyboard
+          .filter((key) => key.value === char)
+          .map((key) => {
+            key.color = "green";
+          });
       }
       newArr[gameRound].color[index] = "green";
     } else if (SELECTEDWORDCHARS.includes(char)) {
@@ -134,9 +144,11 @@ function Wordle() {
     } else {
       if (!foundGreys.includes(char)) {
         foundGreys.push(char);
-        newKeyboard.filter((key) => key.value === char).map((key) => {
-          key.color = "grey";
-        });
+        newKeyboard
+          .filter((key) => key.value === char)
+          .map((key) => {
+            key.color = "grey";
+          });
       }
       newArr[gameRound].color[index] = "grey";
     }
@@ -160,7 +172,6 @@ function Wordle() {
   const [structuredWord, setStructuredWord] = useState(structuredWords);
   let newArr = [...structuredWord];
   let newKeyboard = [...keyboard];
-  console.log(newKeyboard);
   const textInput = useRef();
   function onSubmitHandler(event) {
     event.preventDefault();
@@ -170,7 +181,6 @@ function Wordle() {
       setGameRound(gameRound + 1);
       setStructuredWord(newArr);
       checkWordExist(textInput.current.value);
-      console.log(win);
       if (textInput.current.value === SELECTEDWORD) {
         setWin(1);
       } else if (gameRound == 5) {
@@ -186,9 +196,12 @@ function Wordle() {
   const [textColor, setTextColor] = useState("orange");
   return (
     <>
-      <div>
-        <h1>{SELECTEDWORD}</h1>
-        {godMode < 20 ? <h1>Wordle</h1> : <h1>Wordle God Mode</h1>}
+      <div className="body">
+        {godMode < 20 ? (
+          <h1 className="title">Wordle</h1>
+        ) : (
+          <h1 className="title">Wordle God Mode</h1>
+        )}
         <div className="input">
           {win == 1 ? (
             <div className="again-box">
@@ -244,9 +257,7 @@ function Wordle() {
         </div>
 
         <WordleBox word={structuredWord} />
-        <WordleKeyboard
-          keys={keyboard}
-        />
+        <WordleKeyboard keys={keyboard} />
       </div>
     </>
   );
