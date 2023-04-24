@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import WordleBox from '../../components/wordle/wordlebox'
+import  Router  from 'next/router'
 
 export default function Home() {
   return (
@@ -13,6 +13,7 @@ export default function Home() {
       <h1>
         Hello World
       </h1>
+      <button onClick={() => Router.push('/wordle')}>Wordle</button>
       
     </>
   )

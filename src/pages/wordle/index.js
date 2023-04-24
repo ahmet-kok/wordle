@@ -1,5 +1,5 @@
-import WordleBox from "../../../components/wordle/wordlebox";
-import { useEffect, useState, useRef } from "react";
+import WordleBox from "../../../components/wordle/WordleBox";
+import { useState, useRef } from "react";
 import { useRouter } from "next/router";
 import WordleKeyboard from "../../../components/keyboard/WordleKeyboard";
 
