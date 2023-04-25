@@ -16,6 +16,12 @@
     margin-right: auto;
   
   }
+
+  .not-valid-word p {
+    width: max-content !important;
+    font-size: 28px !important;
+
+  }
   
   .input form{
     display: flex;
@@ -92,6 +98,7 @@
   }
 
   .keyboard {
+    margin-top: 50px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
