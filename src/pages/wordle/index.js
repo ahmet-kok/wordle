@@ -1,5 +1,5 @@
 import WordleBox from "../../../components/wordle/WordleBox";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/router";
 import WordleKeyboard from "../../../components/keyboard/WordleKeyboard";
 
@@ -80,6 +80,7 @@ function Wordle() {
       newArr[gameRound].text = textInput.current.value;
       checkWord(word);
       setStructuredWord(newArr);
+      return true;
 
     } else {
       setWin(3);
@@ -87,6 +88,7 @@ function Wordle() {
       function callBack_func() {
         setWin(0);
       }
+      return false;
     }
   }
   function checkWord(word) {
@@ -165,18 +167,28 @@ function Wordle() {
   const youWin = useRef();
   const youLose = useRef();
 
+  useEffect(() => {
+
+    
+
+    console.log(win);
+  
+  }, [win]);
+
+let isExsist;
 
   function onSubmitHandler(event) {
     event.preventDefault();
     if (textInput.current.value.length == 5) {
-      checkWordExist(textInput.current.value);
+      isExsist = checkWordExist(textInput.current.value);
       if (textInput.current.value === SELECTEDWORD) {
         setWin(1);
         setTimeout(callBack_func, 300);
       function callBack_func() {
         youWin.current.focus();
       }
-      } else if (gameRound == 5) {
+      } else if (gameRound == 5 && isExsist
+        ) {
         setWin(2);
         setTimeout(callBack_func, 300);
       function callBack_func() {
@@ -253,7 +265,9 @@ function Wordle() {
                 Kontrol Et
               </button>
             </form>
-          ) : (
+          ) : ( win == 2 ?
+            
+            (
             <div className="again-box">
               <p>kaybettin 😔</p>
               <button
@@ -265,7 +279,7 @@ function Wordle() {
                 Tekrar Oyna
               </button>
             </div>
-          ))}
+          ) : null ))}
         </div>
 
         <WordleBox word={structuredWord} />
