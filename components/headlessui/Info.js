@@ -2,8 +2,9 @@ import { Disclosure } from '@headlessui/react'
 import { ChevronUpIcon } from '@heroicons/react/20/solid'
 
 function Info(props) {
+    const newClass = props.className;
   return (
-    <div className={"w-full px-4 pt-16", props.className}>
+    <div className={newClass}>
       <div className="mx-auto w-full  rounded-2xl bg-white p-2">
         <Disclosure>
           {({ open }) => (
