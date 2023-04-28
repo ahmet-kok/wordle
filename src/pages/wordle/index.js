@@ -98,19 +98,6 @@ function Wordle() {
     word.split("").map((char, index) => {
       checkChar(char, index);
     });
-    /* filter((char, index) => {
-      if (char === SELECTEDWORDCHARS[index]) {
-        foundGreens.push(index);
-        console.log(foundGreens);
-      } else if (SELECTEDWORDCHARS.includes(char)) {
-        foundOranges.push(index);
-        console.log(foundOranges);
-      } else {
-        foundGreys.push(index);
-        console.log(foundGreys);
-      }
-    }
-    ); */
   }
   function checkChar(char, index) {
     if (char === SELECTEDWORDCHARS[index]) {
@@ -210,7 +197,7 @@ let isExsist;
   const [textColor, setTextColor] = useState("orange");
   return (
     <>
-      <div className="body">
+      <div className="h-screen body bg-[#121214] text-white">
         {godMode < 20 ? (
           <h1 className="title">Wordle</h1>
         ) : (
